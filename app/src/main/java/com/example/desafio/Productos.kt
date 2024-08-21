@@ -4,17 +4,17 @@ data class Producto(
     val id: Int,
     var nombre: String,
     var descripcion: String,
-    var disponible: String,
-    var habilitado: String,
+    var disponible: Boolean,
+    var habilitado: Boolean,
     var stock: Int = 0
 )
 
 fun main() {
     val productos = listOf(
-        Producto(999, "Lapiz", "N/A", "SI", "SI", 500),
-        Producto(998, "Hoja de carta", "Hojas", "SI", "SI", 1000),
-        Producto(997, "Borrador", "N/A", "SI", "SI", 250),
-        Producto(996, "Regla", "Metálica", "SI", "SI", 0),
+        Producto(999, "Lapiz", "Tinta Negra", false, true, 500),
+        Producto(998, "Hojas", "Formato carta", true, false, 1000),
+        Producto(997, "Borrador", "N/A", true, false, 250),
+        Producto(996, "Regla", "Metálica", false, true, 0),
     )
 
     val productosProcesados = productos.map {
@@ -22,19 +22,19 @@ fun main() {
             it.id,
             it.nombre.uppercase(),
             it.descripcion,
-            if (it.disponible == "true") "SI" else "NO",
-            if (it.habilitado == "true") "SI" else "NO",
+            it.disponible,
+            it.habilitado,
             if (it.stock == 0) 0 else it.stock
         )
     }
 
-    productosProcesados.sortedByDescending { it.stock.toInt() }.forEach {
+    productosProcesados.sortedByDescending { it.stock }.forEach {
         println("+++++++++++++++++++++++++++++++++++++++++++++")
         println("ID: ${it.id}")
         println("NOMBRE: ${it.nombre}")
         println("DESCRIPCIÓN: ${it.descripcion}")
-        println("DISPONIBLE: ${it.disponible}")
-        println("HABILITADO: ${it.habilitado}")
+        println("DISPONIBLE: ${if (it.disponible) "SI" else "NO"}")
+        println("HABILITADO: ${if (it.habilitado) "SI" else "NO"}")
         println("STOCK: ${it.stock}")
         println("+++++++++++++++++++++++++++++++++++++++++++++")
     }
