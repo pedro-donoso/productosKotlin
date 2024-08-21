@@ -2,17 +2,19 @@ package com.example.desafio
 
 data class Producto(
     val id: Int,
-    val nombre: String,
-    val descripcion: String,
-    val disponible: String,
-    val habilitado: String,
-    val stock: String
+    var nombre: String,
+    var descripcion: String,
+    var disponible: String,
+    var habilitado: String,
+    var stock: Int = 0
 )
 
 fun main() {
     val productos = listOf(
-        Producto(100, "Lapiz", "N/A", "SI", "SI", "20"),
-        Producto(102, "Hoja de carta", "Hojas para impresora", "SI", "SI", "100")
+        Producto(999, "Lapiz", "N/A", "SI", "SI", 500),
+        Producto(998, "Hoja de carta", "Hojas", "SI", "SI", 1000),
+        Producto(997, "Borrador", "N/A", "SI", "SI", 250),
+        Producto(996, "Regla", "Metálica", "SI", "SI", 0),
     )
 
     val productosProcesados = productos.map {
@@ -22,7 +24,7 @@ fun main() {
             it.descripcion,
             if (it.disponible == "true") "SI" else "NO",
             if (it.habilitado == "true") "SI" else "NO",
-            if (it.stock == "0") "Sin Stock" else it.stock
+            if (it.stock == 0) 0 else it.stock
         )
     }
 
